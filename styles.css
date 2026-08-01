@@ -259,21 +259,25 @@ body.site-loaded .site-intro {
 .mobile-nav {
   display: none;
   border-top: 1px solid rgba(170, 225, 7, 0.16);
-  background: rgba(9, 16, 10, 0.94);
-}
+    background: linear-gradient(180deg, rgba(9, 16, 10, 0.98), rgba(5, 10, 6, 0.98));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  }
 
-.mobile-nav-inner {
-  display: grid;
-  gap: 10px;
-  padding: 14px 0 18px;
-}
+  .mobile-nav-inner {
+    display: grid;
+    gap: 10px;
+    padding: 16px 0 20px;
+  }
 
-.mobile-nav a {
-  color: var(--text);
-  font-size: 0.98rem;
-}
+  .mobile-nav a {
+    color: var(--text);
+    font-size: 0.98rem;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(170, 225, 7, 0.12);
+  }
 
-.mobile-nav.is-open {
+  .mobile-nav a:last-child {
+    border-bottom: 0;
   display: block;
 }
 
@@ -307,6 +311,7 @@ body.site-loaded .site-intro {
   content: '';
   position: absolute;
   inset: 0;
+  pointer-events: none;
   background:
     linear-gradient(90deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.2) 44%, rgba(0, 0, 0, 0.45) 100%),
     radial-gradient(circle at top left, rgba(170, 225, 7, 0.24), transparent 30%),
@@ -379,6 +384,7 @@ body.site-loaded .site-intro {
   bottom: 110px;
   left: 46px;
   max-width: calc(100% - 360px);
+  align-items: center;
 }
 
 .btn {
@@ -386,10 +392,13 @@ body.site-loaded .site-intro {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  padding: 12px 20px;
+  padding: 12px 22px;
   border-radius: 999px;
   font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
 }
 
 .btn:hover {
@@ -402,10 +411,19 @@ body.site-loaded .site-intro {
   box-shadow: 0 0 22px rgba(170, 225, 7, 0.3);
 }
 
+.btn-primary:hover {
+  box-shadow: 0 0 28px rgba(170, 225, 7, 0.4);
+}
+
 .btn-secondary {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(170, 225, 7, 0.28);
   color: var(--text);
-  background: rgba(124, 255, 135, 0.06);
+  background: rgba(124, 255, 135, 0.08);
+}
+
+.btn-secondary:hover {
+  border-color: rgba(170, 225, 7, 0.48);
+  box-shadow: 0 0 16px rgba(170, 225, 7, 0.16);
 }
 
 .poster-logo-block {
@@ -1465,6 +1483,7 @@ body.site-loaded .site-intro {
 
   .nav-wrap {
     grid-template-columns: 1fr auto;
+    padding: 12px 0;
   }
 
   .mission-row {
@@ -1574,6 +1593,10 @@ body.site-loaded .site-intro {
     padding: 56px 0;
   }
 
+  .site-header {
+    border-bottom-color: rgba(220, 255, 219, 0.16);
+  }
+
   .hero {
     padding-top: 20px;
   }
@@ -1593,12 +1616,13 @@ body.site-loaded .site-intro {
   }
 
   .poster-art {
-    min-height: clamp(560px, 82vh, 720px);
+    min-height: clamp(620px, 84vh, 760px);
     border-radius: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding-bottom: 24px;
+    overflow: visible;
   }
 
   .poster-copy {
@@ -1608,6 +1632,8 @@ body.site-loaded .site-intro {
     right: auto;
     padding: 28px 24px 0;
     max-width: none;
+    display: grid;
+    gap: 8px;
   }
 
   .eyebrow {
@@ -1635,6 +1661,7 @@ body.site-loaded .site-intro {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-start;
   }
 
   .btn {
@@ -1649,7 +1676,7 @@ body.site-loaded .site-intro {
     bottom: auto;
     display: flex;
     justify-content: flex-start;
-    padding: 0 24px 14px;
+    padding: 0 24px 8px;
   }
 
   .poster-logo {
@@ -1663,6 +1690,7 @@ body.site-loaded .site-intro {
     display: inline-block;
     margin: 0 24px 0;
     align-self: flex-start;
+    backdrop-filter: blur(8px);
   }
 
   .niche-header {
