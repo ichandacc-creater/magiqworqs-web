@@ -29,9 +29,6 @@ body {
   min-height: 100vh;
 }
 
-body.menu-open {
-  overflow: hidden;
-}
 
 .site-intro {
   position: fixed;

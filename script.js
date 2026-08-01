@@ -112,7 +112,6 @@ function initMobileNav() {
     mobileNav.classList.toggle('is-open', isOpen);
     toggle.setAttribute('aria-expanded', String(isOpen));
     toggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
-    document.body.classList.toggle('menu-open', isOpen);
   };
 
   const closeMenu = () => setMenuState(false);
