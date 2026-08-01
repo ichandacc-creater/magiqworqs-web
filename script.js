@@ -108,22 +108,32 @@ function initMobileNav() {
 
   if (!toggle || !mobileNav) return;
 
-  const closeMenu = () => {
-    mobileNav.classList.remove('is-open');
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.setAttribute('aria-label', 'Open navigation');
-    document.body.classList.remove('menu-open');
-  };
-
-  toggle.addEventListener('click', () => {
-    const isOpen = mobileNav.classList.toggle('is-open');
+  const setMenuState = (isOpen) => {
+    mobileNav.classList.toggle('is-open', isOpen);
     toggle.setAttribute('aria-expanded', String(isOpen));
     toggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
     document.body.classList.toggle('menu-open', isOpen);
-  });
+  };
+
+  const closeMenu = () => setMenuState(false);
+  const toggleMenu = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const isOpen = !mobileNav.classList.contains('is-open');
+    setMenuState(isOpen);
+  };
+
+  toggle.addEventListener('click', toggleMenu);
+  toggle.addEventListener('touchend', toggleMenu);
 
   mobileNav.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!mobileNav.contains(event.target) && !toggle.contains(event.target)) {
+      closeMenu();
+    }
   });
 }
 
