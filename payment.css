@@ -1,0 +1,322 @@
+:root {
+  --bg: #050705;
+  --frame: #a9e107;
+  --text: #f8f8f2;
+  --muted: #b9c1af;
+  --panel: rgba(10, 18, 9, 0.82);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #000000;
+  font-family: 'Saira', sans-serif;
+  color: var(--text);
+}
+
+.payment-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 26px;
+}
+
+.payment-frame {
+  position: relative;
+  width: min(960px, 100%);
+  padding: 42px;
+  border-radius: 34px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(5, 8, 5, 0.95));
+  border: 1px solid rgba(170, 225, 7, 0.34);
+  box-shadow:
+    0 0 0 2px rgba(170, 225, 7, 0.52),
+    0 0 38px rgba(170, 225, 7, 0.32),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    inset 0 10px 30px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px) saturate(135%);
+  -webkit-backdrop-filter: blur(16px) saturate(135%);
+}
+
+.payment-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(10, 18, 9, 0.82));
+  border: 1px solid rgba(170, 225, 7, 0.18);
+  border-radius: 28px;
+  padding: 36px 42px 28px;
+  min-height: 760px;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.panel-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top center, rgba(170, 225, 7, 0.36), transparent 30%),
+    radial-gradient(circle at bottom center, rgba(170, 225, 7, 0.16), transparent 42%);
+  pointer-events: none;
+}
+
+.brand-bar {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 22px;
+}
+
+.brand-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 10px 16px 10px 8px;
+  border: 1px solid rgba(170, 225, 7, 0.28);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(15, 24, 11, 0.96));
+  box-shadow: 0 0 12px rgba(170, 225, 7, 0.14);
+  border-radius: 18px;
+  backdrop-filter: blur(14px) saturate(145%);
+  -webkit-backdrop-filter: blur(14px) saturate(145%);
+}
+
+.brand-logo {
+  width: 190px;
+  height: 190px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  margin-right: -26px;
+}
+
+.brand-text {
+  font-family: 'Saira Condensed', sans-serif;
+  font-size: 1.32rem;
+  line-height: 0.9;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-left: 0;
+}
+
+.payment-title {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 16px;
+  font-family: 'Saira Condensed', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.payment-title span {
+  display: block;
+  color: var(--text);
+  font-size: clamp(4rem, 8vw, 6.4rem);
+  line-height: 0.9;
+}
+
+.payment-title strong {
+  display: block;
+  color: #aae107;
+  font-size: clamp(4rem, 8vw, 6.4rem);
+  line-height: 0.9;
+}
+
+.thank-you {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 30px;
+  padding: 10px 0 18px;
+  border-bottom: 1px solid rgba(170, 225, 7, 0.42);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  color: var(--text);
+}
+
+.thank-you em {
+  font-style: normal;
+  color: #aae107;
+}
+
+.payment-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+
+.payment-col {
+  min-width: 0;
+}
+
+.payment-col h2 {
+  margin: 0 0 22px;
+  color: #f7f8f1;
+  font-family: 'Saira Condensed', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.mobile-col {
+  padding-top: 0;
+  margin-top: -18px;
+}
+
+.mobile-col .placeholder-row {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.payment-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: center;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(170, 225, 7, 0.18);
+}
+
+.mobile-col .payment-row {
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  text-align: left;
+}
+
+.payment-row span {
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.payment-row strong {
+  color: #f8f8f2;
+  font-size: 1.04rem;
+  font-weight: 700;
+}
+
+.mobile-col .payment-row strong {
+  color: #aae107;
+}
+
+.mobile-number-stack {
+  display: grid;
+  gap: 6px;
+  justify-items: end;
+}
+
+.mobile-holder-name {
+  color: var(--muted);
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.payment-hands-wrap {
+  position: relative;
+  z-index: 1;
+  margin: 26px auto 0;
+  width: min(900px, 100%);
+  background: transparent;
+}
+
+.payment-hands-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: normal;
+  opacity: 1;
+  filter: none;
+}
+
+.contact-details {
+  position: relative;
+  z-index: 1;
+  margin-top: 18px;
+  text-align: center;
+}
+
+.contact-details p {
+  margin: 2px 0;
+}
+
+.contact-details p:first-child {
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.contact-details p:nth-child(2) {
+  color: #aae107;
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.contact-details p:nth-child(3) {
+  color: #ffffff;
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.contact-details p:nth-child(3) a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.contact-details p:nth-child(3) .social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-details p:nth-child(3) .social-icon {
+  width: 18px;
+  height: 18px;
+  color: #ffffff;
+}
+
+.contact-details p:nth-child(3) a:hover {
+  color: #aae107;
+}
+
+.contact-details p:nth-child(3) span {
+  color: #ffffff;
+}
+
+.contact-details p:nth-child(4) {
+  color: #aae107;
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+@media (max-width: 760px) {
+  .payment-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-card {
+    padding: 24px 20px 26px;
+  }
+
+  .payment-frame {
+    padding: 16px;
+  }
+
+  .payment-row {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .phone {
+    width: 110px;
+    height: 110px;
+  }
+}
