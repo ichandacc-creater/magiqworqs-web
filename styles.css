@@ -259,25 +259,28 @@ body.site-loaded .site-intro {
 .mobile-nav {
   display: none;
   border-top: 1px solid rgba(170, 225, 7, 0.16);
-    background: linear-gradient(180deg, rgba(9, 16, 10, 0.98), rgba(5, 10, 6, 0.98));
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-  }
+  background: linear-gradient(180deg, rgba(9, 16, 10, 0.98), rgba(5, 10, 6, 0.98));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
 
-  .mobile-nav-inner {
-    display: grid;
-    gap: 10px;
-    padding: 16px 0 20px;
-  }
+.mobile-nav-inner {
+  display: grid;
+  gap: 10px;
+  padding: 16px 0 20px;
+}
 
-  .mobile-nav a {
-    color: var(--text);
-    font-size: 0.98rem;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(170, 225, 7, 0.12);
-  }
+.mobile-nav a {
+  color: var(--text);
+  font-size: 0.98rem;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(170, 225, 7, 0.12);
+}
 
-  .mobile-nav a:last-child {
-    border-bottom: 0;
+.mobile-nav a:last-child {
+  border-bottom: 0;
+}
+
+.mobile-nav.is-open {
   display: block;
 }
 
