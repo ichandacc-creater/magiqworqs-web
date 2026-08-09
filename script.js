@@ -178,7 +178,11 @@ function initIntroVideo() {
       window.clearTimeout(revealTimer);
     }
 
-    revealTimer = window.setTimeout(revealSite, 4000);
+    if (introVideo.duration && Number.isFinite(introVideo.duration)) {
+      revealTimer = window.setTimeout(revealSite, introVideo.duration * 1000);
+    } else {
+      revealTimer = window.setTimeout(revealSite, 4000);
+    }
   };
 
   introVideo.addEventListener('ended', revealSite, { once: true });
