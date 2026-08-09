@@ -10,6 +10,13 @@ const worksImages = [
   'Genius Mambwe - Graphic Designer Portfolio 20266_page-0043.jpg'
 ];
 
+function encodeAssetPath(assetPath) {
+  return assetPath
+    .split('/')
+    .map((segment) => encodeURIComponent(segment))
+    .join('/');
+}
+
 const galleryLabels = [
   'Featured concept',
   'Editorial highlight',
@@ -45,7 +52,7 @@ function createWorkCard(src, index) {
   article.className = 'work-tile reveal magic-card';
   article.innerHTML = `
     <div class="tile-mock">
-      <img src="Works/${src}" alt="Portfolio artwork preview" />
+      <img src="${encodeAssetPath(`Works/${src}`)}" alt="Portfolio artwork preview" />
     </div>
     <div class="tile-copy">
       <span>${galleryLabels[index % galleryLabels.length]}</span>
@@ -75,7 +82,7 @@ function startCategoryRotation() {
 
     setInterval(() => {
       index = (index + 1) % images.length;
-      img.src = images[index];
+      img.src = encodeAssetPath(images[index]);
     }, 2800);
   });
 }
@@ -138,22 +145,15 @@ function initMobileNav() {
 
 function initIntroVideo() {
   const introVideo = document.querySelector('#introVideo');
+  const intro = document.querySelector('.site-intro');
 
-  if (!introVideo) {
-    document.body.classList.add('site-loaded');
+  if (!introVideo || !intro) {
+    document.body.classList.remove('intro-active');
     return;
   }
 
   let revealScheduled = false;
   let revealTimer = null;
-
-  const tryPlay = () => {
-    const playPromise = introVideo.play();
-
-    if (playPromise && typeof playPromise.then === 'function') {
-      playPromise.catch(() => {});
-    }
-  };
 
   const revealSite = () => {
     if (revealScheduled) return;
@@ -161,7 +161,15 @@ function initIntroVideo() {
     if (revealTimer) {
       window.clearTimeout(revealTimer);
     }
-    document.body.classList.add('site-loaded');
+    document.body.classList.remove('intro-active');
+    intro.setAttribute('aria-hidden', 'true');
+  };
+
+  const tryPlay = () => {
+    const playPromise = introVideo.play();
+    if (playPromise && typeof playPromise.then === 'function') {
+      playPromise.catch(() => {});
+    }
   };
 
   const scheduleReveal = () => {
@@ -169,7 +177,11 @@ function initIntroVideo() {
     if (revealTimer) {
       window.clearTimeout(revealTimer);
     }
-    revealTimer = window.setTimeout(revealSite, 4000);
+
+    const videoDuration = Number.isFinite(introVideo.duration) && introVideo.duration > 0
+      ? introVideo.duration * 1000
+      : 4000;
+    revealTimer = window.setTimeout(revealSite, Math.max(2500, videoDuration));
   };
 
   introVideo.addEventListener('ended', revealSite, { once: true });
@@ -178,10 +190,13 @@ function initIntroVideo() {
     tryPlay();
     scheduleReveal();
   }, { once: true });
+  introVideo.addEventListener('error', revealSite, { once: true });
+
   window.addEventListener('load', () => {
     tryPlay();
     scheduleReveal();
   }, { once: true });
+
   document.addEventListener('pointerdown', () => {
     tryPlay();
     scheduleReveal();
@@ -190,6 +205,7 @@ function initIntroVideo() {
     tryPlay();
     scheduleReveal();
   }, { once: true });
+
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
       tryPlay();
@@ -197,6 +213,7 @@ function initIntroVideo() {
     }
   });
 
+  document.body.classList.add('intro-active');
   scheduleReveal();
 }
 
