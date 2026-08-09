@@ -206,9 +206,9 @@ body.site-loaded .site-intro {
   }
 
   .intro-real-image {
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
-    background: transparent;
+    background: #000;
   }
 
   .intro-glow-overlay {
