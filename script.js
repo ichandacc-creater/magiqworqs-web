@@ -178,14 +178,14 @@ function initIntroVideo() {
       window.clearTimeout(revealTimer);
     }
 
-    const videoDuration = Number.isFinite(introVideo.duration) && introVideo.duration > 0
-      ? introVideo.duration * 1000
-      : 4000;
-    revealTimer = window.setTimeout(revealSite, Math.max(2500, videoDuration));
+    revealTimer = window.setTimeout(revealSite, 4000);
   };
 
   introVideo.addEventListener('ended', revealSite, { once: true });
-  introVideo.addEventListener('canplay', tryPlay, { once: true });
+  introVideo.addEventListener('canplay', () => {
+    tryPlay();
+    scheduleReveal();
+  }, { once: true });
   introVideo.addEventListener('loadedmetadata', () => {
     tryPlay();
     scheduleReveal();
