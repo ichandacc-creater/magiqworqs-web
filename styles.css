@@ -90,17 +90,6 @@ body:not(.intro-active) .site-intro {
   display: block;
 }
 
-.intro-glow-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at center, rgba(223, 255, 151, 0.58), transparent 30%),
-    radial-gradient(circle at center, rgba(129, 235, 44, 0.26), transparent 48%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.3));
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-
 @media (orientation: landscape) and (max-width: 900px) {
   .intro-stage {
     width: 100vw;
