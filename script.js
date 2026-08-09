@@ -136,15 +136,76 @@ function initMobileNav() {
   });
 }
 
+function initIntroVideo() {
+  const introVideo = document.querySelector('#introVideo');
+
+  if (!introVideo) {
+    document.body.classList.add('site-loaded');
+    return;
+  }
+
+  let revealScheduled = false;
+  let revealTimer = null;
+
+  const tryPlay = () => {
+    const playPromise = introVideo.play();
+
+    if (playPromise && typeof playPromise.then === 'function') {
+      playPromise.catch(() => {});
+    }
+  };
+
+  const revealSite = () => {
+    if (revealScheduled) return;
+    revealScheduled = true;
+    if (revealTimer) {
+      window.clearTimeout(revealTimer);
+    }
+    document.body.classList.add('site-loaded');
+  };
+
+  const scheduleReveal = () => {
+    if (revealScheduled) return;
+    if (revealTimer) {
+      window.clearTimeout(revealTimer);
+    }
+    revealTimer = window.setTimeout(revealSite, 4000);
+  };
+
+  introVideo.addEventListener('ended', revealSite, { once: true });
+  introVideo.addEventListener('canplay', tryPlay, { once: true });
+  introVideo.addEventListener('loadedmetadata', () => {
+    tryPlay();
+    scheduleReveal();
+  }, { once: true });
+  window.addEventListener('load', () => {
+    tryPlay();
+    scheduleReveal();
+  }, { once: true });
+  document.addEventListener('pointerdown', () => {
+    tryPlay();
+    scheduleReveal();
+  }, { once: true });
+  document.addEventListener('keydown', () => {
+    tryPlay();
+    scheduleReveal();
+  }, { once: true });
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      tryPlay();
+      scheduleReveal();
+    }
+  });
+
+  scheduleReveal();
+}
+
 function initializeSite() {
   renderWorkGallery();
   startCategoryRotation();
   initRevealAnimations();
   initMobileNav();
-
-  window.setTimeout(() => {
-    document.body.classList.add('site-loaded');
-  }, 2200);
+  initIntroVideo();
 }
 
 if (document.readyState === 'loading') {
